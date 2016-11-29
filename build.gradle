@@ -1,0 +1,54 @@
+group 'com.github.basovnik'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'http://repo.spring.io/plugins-release' }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE")
+        classpath("org.springframework.build.gradle:propdeps-plugin:0.0.7")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+apply plugin: 'propdeps'
+apply plugin: 'propdeps-maven'
+apply plugin: 'propdeps-idea'
+apply plugin: 'propdeps-eclipse'
+
+jar {
+    baseName = 'spring-boot-demo'
+    version =  '0.0.1-SNAPSHOT'
+}
+
+repositories {
+    jcenter()
+}
+
+ext {
+    cxfVersion = "3.1.7"
+    lombokVersion = "1.16.10"
+    morphiaVersion = "1.2.1"
+    jettisonVersion = "1.3.8"
+    restAssuredVersion = "3.0.1"
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter")
+    compile("org.apache.cxf:cxf-spring-boot-starter-jaxrs:${cxfVersion}")
+    compile("org.apache.cxf:cxf-rt-rs-extension-providers:${cxfVersion}")
+    compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+    compile("org.mongodb.morphia:morphia:${morphiaVersion}")
+    compileOnly("org.projectlombok:lombok:${lombokVersion}")
+    runtime("org.apache.cxf:cxf-rt-rs-service-description:${cxfVersion}")
+    runtime("org.codehaus.jettison:jettison:${jettisonVersion}")
+    optional("org.springframework.boot:spring-boot-devtools")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    testCompile("io.rest-assured:rest-assured:${restAssuredVersion}")
+}

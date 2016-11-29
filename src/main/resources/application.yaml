@@ -1,0 +1,4 @@
+# logging.level.root: debug
+spring.output.ansi.enabled: ALWAYS
+cxf.jaxrs.component-scan: true
+demo.db.name: demo
